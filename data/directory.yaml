@@ -6959,6 +6959,7 @@
   sources:
   - https://github.com/masonan777/Daves-the-Diver-Coop-Mod
   checked: '2026-10-19'
+  made_with_coop_anything: true
 - game: Dave the Diver
   year: 2023
   engine: Unity
@@ -7005,3 +7006,4 @@
   - https://discord.com/channels/1561411702082510879/1562166509659230338
   - https://steamcommunity.com/app/1458140/discussions/0/604153001708376779
   checked: '2026-10-20'
+  made_with_coop_anything: true
