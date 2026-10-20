@@ -3797,6 +3797,34 @@
   sources:
   - https://www.nexusmods.com/hades/mods/215
   checked: 2026-10-16
+- game: Hades
+  year: 2020
+  engine: Supergiant proprietary
+  project: Hades Multiplayer (COOP Anything inspired)
+  url: https://github.com/Yarmungandr/Hades-Multiplayer-COOP-Anything
+  other_urls:
+  - https://discord.com/channels/1561411702082510879/1562206020976124024
+  kind: mod
+  status: alpha
+  coop_scope:
+    players_visible: 'yes'
+    story: partial
+    enemies: 'yes'
+    world_state: 'yes'
+    items: shared
+  players: 1-4
+  networking: ''
+  open_source: 'yes'
+  last_activity: 2026-10
+  qa: none
+  notes: Experimental overlay on TheNormalnij's HadesCoopMod v0.4.3 for up to four players in one game instance, each on
+    their own controller; remote friends join through Parsec on the host PC. Adds player labels and outlines,
+    next-chamber revival, a Revive P1 pause-menu button and one shared gold wallet. Lua regression tests use simulated
+    game functions; the author says the latest changes are not confirmed in a real session. MIT.
+  sources:
+  - https://github.com/Yarmungandr/Hades-Multiplayer-COOP-Anything
+  checked: '2026-10-20'
+  made_with_coop_anything: true
 - game: Hades II
   year: 2025
   engine: Supergiant proprietary
