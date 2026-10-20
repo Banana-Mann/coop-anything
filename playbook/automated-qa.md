@@ -33,6 +33,11 @@ policy and the techniques that made it work on four very different engines.
 5. **One port and one install per parallel agent**, so several agents can test at once
    without killing each other's games.
 
+Ready-made pieces for this shape are in [tools/](../tools/README.md): a game slot lock and
+warm pool for the copies, JSON scenarios, a bot runner with co-op playbooks, a chaos relay
+for lag and loss, a flight recorder for desyncs, a fuzzer for the sync core and an
+animation checker.
+
 ### Examples
 
 | Game | Engine | How the bot works | Oracle |

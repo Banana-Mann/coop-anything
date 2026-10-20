@@ -313,7 +313,9 @@ def t_list_docs():
     pb = sorted(p.stem for p in (ROOT / "playbook").glob("*.md"))
     games = sorted(p.name for p in (ROOT / "games").iterdir() if p.is_dir())
     skills = sorted(p.name for p in (ROOT / ".agents" / "skills").iterdir() if p.is_dir())
-    return {"playbook": pb, "games": games, "skills": skills, "start": "AGENTS.md"}
+    test_tools = sorted(p.parent.name for p in (ROOT / "tools").glob("*/README.md"))
+    return {"playbook": pb, "games": games, "skills": skills, "test_tools": test_tools,
+            "start": "AGENTS.md"}
 
 
 def t_read_playbook(page):
@@ -329,6 +331,10 @@ def t_get_skill(name):
 
 def t_get_game(slug):
     return read(f"games/{slug}/README.md")
+
+
+def t_get_test_tool(name):
+    return read(f"tools/{name}/README.md")
 
 
 def t_validate_entry(entry_yaml):
@@ -352,13 +358,15 @@ TOOLS = {
                       {"game_dir": ("string", "absolute path of the game install folder")}, ["game_dir"]),
     "game_identity": (game_identity, "SHA-256, size, architecture, PE details and version resource of a game executable, plus the Steam app id and build id when it sits in a Steam library, to record the exact build before following any write-up.",
                       {"exe_path": ("string", "absolute path of the game exe")}, ["exe_path"]),
-    "list_docs": (t_list_docs, "List the playbook pages, game write-ups and agent skills available in Co-op Anything.", {}, []),
+    "list_docs": (t_list_docs, "List the playbook pages, game write-ups, agent skills and sync test tools available in Co-op Anything.", {}, []),
     "read_playbook": (t_read_playbook, "Read a playbook page (e.g. triage, research, reverse-engineering, tools, how-coop-mods-work, networking, automated-qa) or AGENTS.",
                       {"page": ("string", "page name without .md, or AGENTS")}, ["page"]),
     "get_skill": (t_get_skill, "Read an agent skill by name, starting with coop-triage (list_docs lists them all).",
                   {"name": ("string", "skill name")}, ["name"]),
     "get_game": (t_get_game, "Read the write-up for a game that has been worked on (see list_docs for slugs).",
                  {"slug": ("string", "folder name under games/")}, ["slug"]),
+    "get_test_tool": (t_get_test_tool, "Read the README of a co-op sync test tool (chaos, flight, fuzz, ownership, fakeworld, gameslot, gamepool, scenarios, bots, animcheck; list_docs lists them).",
+                      {"name": ("string", "folder name under tools/")}, ["name"]),
     "validate_entry": (t_validate_entry, "Check a new or edited directory entry (YAML text) against the schema before contributing it.",
                        {"entry_yaml": ("string", "one entry as YAML")}, ["entry_yaml"]),
 }

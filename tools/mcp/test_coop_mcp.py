@@ -117,6 +117,18 @@ class Directory(unittest.TestCase):
         self.assertTrue(all(e.get("sources") for e in projects))
 
 
+class TestTools(unittest.TestCase):
+    def test_every_listed_tool_has_a_readable_readme(self):
+        names = m.t_list_docs()["test_tools"]
+        self.assertIn("chaos", names)
+        for name in names:
+            self.assertTrue(m.t_get_test_tool(name).strip(), name)
+
+    def test_no_path_escape(self):
+        with self.assertRaises(ValueError):
+            m.t_get_test_tool("../../..")
+
+
 class Protocol(unittest.TestCase):
     def call(self, *messages):
         lines = "\n".join(json.dumps(msg) for msg in messages) + "\n"

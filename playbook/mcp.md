@@ -10,6 +10,7 @@ and nothing else. It reads your clone, so `git pull` updates it.
 | `detect_engine` | Scan a game install folder and identify the engine from file signatures (archive headers where an extension is shared), with evidence, hooking tools, anti-cheat warnings and co-op projects on the same engine |
 | `game_identity` | SHA-256, architecture, PE details and version resource of the game exe, plus the Steam app id and build id for Steam installs, to record the exact build |
 | `list_docs`, `read_playbook`, `get_skill`, `get_game` | Read the playbook, the agent skills and the game write-ups |
+| `get_test_tool` | Read the README of a sync test tool in `tools/` (chaos box, flight recorder, fuzzer, bots and more) |
 | `validate_entry` | Check a directory entry against the schema before contributing it |
 
 Pair it with a reverse-engineering MCP such as [REA](https://github.com/morluto/rea) for the
