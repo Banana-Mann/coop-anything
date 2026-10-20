@@ -7043,3 +7043,154 @@
   - https://steamcommunity.com/app/1458140/discussions/0/604153001708376779
   checked: '2026-10-20'
   made_with_coop_anything: true
+- game: BattleTech
+  year: 2018
+  engine: Unity
+  project: BattleTech Co-op (Co-op Anything Discord)
+  url: https://discord.com/channels/1561411702082510879/1562162768403234959
+  other_urls: []
+  kind: mod
+  status: prototype
+  coop_scope: {}
+  players: unknown
+  networking: unknown
+  open_source: unknown
+  last_activity: 2026-10
+  qa: none
+  notes: In development by a dev on the Co-op Anything Discord, who posts progress in the project's topic there. No public
+    build yet.
+  sources:
+  - https://discord.com/channels/1561411702082510879/1562162768403234959
+  - https://www.pcgamingwiki.com/wiki/BattleTech
+  checked: '2026-10-20'
+  made_with_coop_anything: true
+- game: 'Half-Life: Alyx'
+  year: 2020
+  engine: Source 2
+  project: 'Half-Life: Alyx Co-op (Co-op Anything Discord)'
+  url: https://discord.com/channels/1561411702082510879/1562162773306380392
+  other_urls: []
+  kind: mod
+  status: prototype
+  coop_scope:
+    players_visible: 'yes'
+    enemies: partial
+    world_state: partial
+  players: unknown
+  networking: unknown
+  open_source: unknown
+  last_activity: 2026-10
+  qa: none
+  notes: In development by a dev on the Co-op Anything Discord. The dev reports networking and object sync working, with enemy
+    sync being polished; other players show as an NPC model for now, and testing uses a non-VR mod. No public build yet.
+  sources:
+  - https://discord.com/channels/1561411702082510879/1562162773306380392
+  - https://www.pcgamingwiki.com/wiki/Half-Life%3A_Alyx
+  checked: '2026-10-20'
+  made_with_coop_anything: true
+- game: Final Fantasy VII Remake Intergrade
+  year: 2021
+  engine: Unreal Engine 4
+  project: Final Fantasy VII Remake and Rebirth Co-op (Co-op Anything Discord)
+  url: https://discord.com/channels/1561411702082510879/1562185682934435900
+  other_urls: []
+  kind: mod
+  status: prototype
+  coop_scope: {}
+  players: unknown
+  networking: unknown
+  open_source: unknown
+  last_activity: 2026-10
+  qa: none
+  notes: In development by a dev on the Co-op Anything Discord, who has shown it running in Final Fantasy VII Rebirth and
+    plans to release a version for Remake. No public build yet.
+  sources:
+  - https://discord.com/channels/1561411702082510879/1562185682934435900
+  - https://www.pcgamingwiki.com/wiki/Final_Fantasy_VII_Remake_Intergrade
+  checked: '2026-10-20'
+  made_with_coop_anything: true
+- game: 'Spider-Man: Friend or Foe'
+  year: 2007
+  engine: Vicarious Visions Alchemy
+  project: 'Spider-Man: Friend or Foe Co-op (Co-op Anything Discord)'
+  url: https://discord.com/channels/1561411702082510879/1562185850777772152
+  other_urls: []
+  kind: mod
+  status: prototype
+  coop_scope: {}
+  players: unknown
+  networking: unknown
+  open_source: unknown
+  last_activity: 2026-10
+  qa: none
+  notes: 'Online co-op in development by a dev on the Co-op Anything Discord: each player on their own PC and screen, with
+    keyboard or controller, without Parsec or Steam Remote Play. No public build yet.'
+  sources:
+  - https://discord.com/channels/1561411702082510879/1562185850777772152
+  - https://www.pcgamingwiki.com/wiki/Spider-Man%3A_Friend_or_Foe
+  checked: '2026-10-20'
+  made_with_coop_anything: true
+- game: 'Deep Rock Galactic: Survivor'
+  year: 2025
+  engine: Unity
+  project: 'Deep Rock Galactic: Survivor Co-op (Co-op Anything Discord)'
+  url: https://discord.com/channels/1561411702082510879/1562186471937413190
+  other_urls: []
+  kind: mod
+  status: prototype
+  coop_scope: {}
+  players: unknown
+  networking: unknown
+  open_source: unknown
+  last_activity: 2026-10
+  qa: none
+  notes: In development by a dev on the Co-op Anything Discord, who posts progress in the project's topic there. No public
+    build yet.
+  sources:
+  - https://discord.com/channels/1561411702082510879/1562186471937413190
+  - https://www.pcgamingwiki.com/wiki/Deep_Rock_Galactic%3A_Survivor
+  checked: '2026-10-20'
+  made_with_coop_anything: true
+- game: Little Nightmares
+  year: 2017
+  engine: Unreal Engine 4
+  project: Little Nightmares Co-op (Co-op Anything Discord)
+  url: https://discord.com/channels/1561411702082510879/1562210529504927836
+  other_urls: []
+  kind: mod
+  status: prototype
+  coop_scope:
+    enemies: partial
+  players: unknown
+  networking: unknown
+  open_source: unknown
+  last_activity: 2026-10
+  qa: none
+  notes: In development by a dev on the Co-op Anything Discord. The dev reports that enemies now react to the second player;
+    keeping doors and passages open for the second player is the next step. No public build yet.
+  sources:
+  - https://discord.com/channels/1561411702082510879/1562210529504927836
+  - https://www.pcgamingwiki.com/wiki/Little_Nightmares
+  checked: '2026-10-20'
+  made_with_coop_anything: true
+- game: Yu-Gi-Oh! 5D's Tag Force 4
+  year: 2009
+  engine: unknown
+  project: Yu-Gi-Oh! 5D's Tag Force 4 Co-op (Co-op Anything Discord)
+  url: https://discord.com/channels/1561411702082510879/1562219729181999190
+  other_urls: []
+  kind: mod
+  status: prototype
+  coop_scope: {}
+  players: unknown
+  networking: unknown
+  open_source: unknown
+  last_activity: 2026-10
+  qa: none
+  notes: In development by a dev on the Co-op Anything Discord, who posts progress in the project's topic there. The game
+    is a 2009 PSP release. No public build yet.
+  sources:
+  - https://discord.com/channels/1561411702082510879/1562219729181999190
+  - https://en.wikipedia.org/wiki/List_of_Yu-Gi-Oh!_video_games
+  checked: '2026-10-20'
+  made_with_coop_anything: true
