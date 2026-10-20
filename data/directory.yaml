@@ -6984,3 +6984,46 @@
   sources:
   - https://github.com/S1ii/Coop-Divers
   checked: '2026-10-19'
+- game: Pacific Drive
+  year: 2024
+  engine: Unreal Engine 4
+  project: Pacific Drive Co-op (Co-op Anything Discord)
+  url: https://discord.com/channels/1561411702082510879/1562166509659230338
+  other_urls: []
+  kind: mod
+  status: prototype
+  coop_scope: {}
+  players: unknown
+  networking: unknown
+  open_source: unknown
+  last_activity: 2026-10
+  qa: none
+  notes: In development by a dev on the Co-op Anything Discord, who posts progress in the project's topic there. No
+    public build yet. Ironwood has no plans for official co-op, and an earlier fan multiplayer attempt from 2024 was
+    frozen over loot and player movement sync.
+  sources:
+  - https://discord.com/channels/1561411702082510879/1562166509659230338
+  - https://steamcommunity.com/app/1458140/discussions/0/604153001708376779
+  checked: '2026-10-20'
+- game: Dave the Diver
+  year: 2023
+  engine: Unity
+  project: (none found)
+  url: ''
+  other_urls: []
+  kind: gap
+  status: none
+  coop_scope: {}
+  players: unknown
+  networking: unknown
+  open_source: unknown
+  last_activity: unknown
+  qa: none
+  notes: No co-op or multiplayer mod found. MINTROCKET built it as a single-player game with no plans for multiplayer.
+    Nexus Mods has quality-of-life mods only.
+  sources:
+  - https://dotesports.com/dave-the-diver/news/does-dave-the-diver-have-multiplayer-co-op
+  - https://www.nexusmods.com/davethediver/mods/4
+  checked: '2026-10-20'
+  searched:
+  - 'WebSearch: Dave the Diver co-op multiplayer mod (2026-10-20), nothing found'
