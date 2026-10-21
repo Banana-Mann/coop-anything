@@ -7144,26 +7144,26 @@
   checked: '2026-10-20'
   made_with_coop_anything: true
 - game: 'Deep Rock Galactic: Survivor'
-  year: 2025
-  engine: Unity
-  project: 'Deep Rock Galactic: Survivor Co-op (Co-op Anything Discord)'
-  url: https://discord.com/channels/1561411702082510879/1562186471937413190
+  year: 2024
+  engine: Unity 6 (IL2CPP)
+  project: drg-survivor-coop
+  url: https://github.com/Reudo/drg-survivor-coop
   other_urls: []
   kind: mod
   status: prototype
-  coop_scope: {}
-  players: unknown
-  networking: unknown
-  open_source: unknown
+  coop_scope:
+    players_visible: partial
+  players: '2'
+  networking: direct-ip
+  open_source: 'yes (MIT)'
   last_activity: 2026-10
-  qa: none
-  notes: In development by a dev on the Co-op Anything Discord, who posts progress in the project's topic there. No public
-    build yet.
+  qa: automated
+  notes: Host-authoritative BepInEx/LiteNetLib prototype, direct IP only. The automated runs use two
+    clients on ONE PC; the first real two-PC test went badly, so treat it as experimental. Details in
+    games/deep-rock-galactic-survivor/.
   sources:
-  - https://discord.com/channels/1561411702082510879/1562186471937413190
-  - https://www.pcgamingwiki.com/wiki/Deep_Rock_Galactic%3A_Survivor
-  checked: '2026-10-20'
-  made_with_coop_anything: true
+  - https://github.com/Reudo/drg-survivor-coop
+  checked: '2026-10-21'
 - game: Little Nightmares
   year: 2017
   engine: Unreal Engine 4
