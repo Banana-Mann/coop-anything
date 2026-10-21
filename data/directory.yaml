@@ -7492,3 +7492,34 @@
   - 'Steam forums, Steam appdetails API, Reddit r/GhostRunner, YouTube, general web, 2026-10-21'
   - 'UE4SS CustomGameConfigs list: no Ghostrunner entry, 2026-10-21'
   - 'Local binary triage of the shipping exe and pak footer, 2026-10-21'
+- game: Dave the Diver
+  year: 2023
+  engine: Unity
+  project: Dave the Diver Co-op Setup (FireTva)
+  url: https://github.com/FireTva/dave-the-diver-coop
+  other_urls:
+  - https://github.com/S1ii/Coop-Divers
+  - https://github.com/cranebeaker/coop-anything/issues/42
+  kind: mod
+  status: prototype
+  coop_scope:
+    players_visible: partial
+    story: 'no'
+    enemies: unknown
+    world_state: 'no'
+    items: unknown
+  players: '2'
+  networking: unknown
+  open_source: 'yes'
+  last_activity: 2026-10
+  qa: none
+  notes: Windows installer (BepInEx 6 IL2CPP plus .NET runtime, checksum-verified) for the Coop-Divers online
+    mod, plus a separate experimental Steam-invite prototype with friends-only lobbies and a host/join overlay,
+    and a Linux/Steam Deck (Proton) install script. In the prototype the partner avatar only mirrors movement on
+    the boat and in the sushi bar; world and story state are not shared. The README says a two-client connection
+    has not been verified. MIT.
+  sources:
+  - https://github.com/FireTva/dave-the-diver-coop
+  - https://github.com/cranebeaker/coop-anything/issues/42
+  checked: '2026-10-21'
+  made_with_coop_anything: true
