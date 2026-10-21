@@ -1995,27 +1995,40 @@
 - game: 'Dragon Age: Origins'
   year: 2009
   engine: Eclipse Engine
-  project: (none found)
-  url: ''
-  other_urls: []
-  kind: gap
-  status: none
-  coop_scope: {}
-  players: unknown
-  networking: unknown
-  open_source: unknown
-  last_activity: unknown
-  qa: none
-  notes: No co-op mod found; Steam and Nexus threads treat it as single-player and a long-running request thread
-    has no working answer.
+  project: dao-coop
+  url: https://github.com/vmosenkov/dao-coop
+  other_urls:
+  - https://github.com/cranebeaker/coop-anything/issues/79
+  - https://github.com/Whocares66-Dev/DAOLib
+  kind: mod
+  status: prototype
+  coop_scope:
+    players_visible: partial
+    story: no
+    enemies: partial
+    world_state: no
+    items: no
+  players: '2'
+  networking: lan
+  open_source: yes
+  last_activity: 2026-10
+  qa: automated
+  notes: >-
+    Work in progress on DAOLib, a GPLv3 SKSE-style native plugin framework with
+    an address library for the GOG/EA/Steam builds of 1.05.13263.0. Verified in
+    the game: a guest joins over the network by save transfer, two players
+    control two different party members in the same world with each game
+    mirroring the other's creature, and a host-resolved hostile's health and
+    death state reach the guest. No real combat arbitration (guest attacks are
+    not relayed), no effect, quest or area-transition sync, LAN only, and the
+    ini file is the only interface. Automated two-client tests and a 0.6.0
+    install package are in the project repo.
   sources:
-  - https://steamcommunity.com/app/47810/discussions/0/573795560006592662/
-  - https://forums.nexusmods.com/topic/177697-co-op/
-  checked: '2026-10-16'
-  searched:
-  - 'WebSearch: Dragon Age Origins co-op multiplayer mod (unrestricted and restricted to github.com moddb.com nexusmods.com
-    steamcommunity.com)'
-  - 'Not checked: Reddit (blocked to the search tool)'
+  - https://github.com/vmosenkov/dao-coop
+  - https://github.com/vmosenkov/dao-coop/blob/main/docs/STATUS.md
+  - https://github.com/cranebeaker/coop-anything/issues/79
+  - https://github.com/Whocares66-Dev/DAOLib
+  checked: '2026-10-20'
 - game: Psychonauts
   year: 2005
   engine: Despair Engine / Gamebryo
