@@ -7406,6 +7406,7 @@
   - https://www.nexusmods.com/callofdutyblackops3/mods/53
   - https://github.com/LocalPlayer123/BO3-4-Player-Local-Splitscreen-on-PC
   checked: '2026-10-21'
+
 - game: 'Spider-Man: Friend or Foe'
   year: 2007
   engine: unknown
@@ -7464,3 +7465,31 @@
   checked: '2026-10-21'
   up_for_adoption: false
   made_with_coop_anything: true
+- game: Ghostrunner
+  year: 2020
+  engine: Unreal Engine 4
+  project: (none found)
+  url: ''
+  other_urls: []
+  kind: gap
+  status: none
+  coop_scope: {}
+  players: unknown
+  networking: unknown
+  open_source: unknown
+  last_activity: unknown
+  qa: none
+  notes: >-
+    No co-op or multiplayer mod found for Ghostrunner or Ghostrunner 2 on any platform. The
+    GOG build is Unreal Engine 4.26; engine networking and runtime hook findings are written
+    up in games/ghostrunner.
+  sources:
+  - https://docs.ue4ss.com/dev/patternsleuth-games.html
+  - https://support.505games.com/support/solutions/articles/150000147366/
+  checked: '2026-10-21'
+  searched:
+  - 'GitHub repo+code search (ghostrunner, ghostrunner coop/multiplayer), 2026-10-21'
+  - 'Nexus Mods Ghostrunner + Ghostrunner 2 hubs, GameBanana, ModDB, 2026-10-21'
+  - 'Steam forums, Steam appdetails API, Reddit r/GhostRunner, YouTube, general web, 2026-10-21'
+  - 'UE4SS CustomGameConfigs list: no Ghostrunner entry, 2026-10-21'
+  - 'Local binary triage of the shipping exe and pak footer, 2026-10-21'
