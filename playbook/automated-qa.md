@@ -68,6 +68,7 @@ animation checker.
 - **Teleports fail silently.** A test put a player inside a wall and then "found" a bug.
   Assert the precondition (player really is inside the trigger) before asserting the
   result.
+- **Check streamed-object ownership.** Validate current-area identity before reusing a trigger; stale registrations can survive a load ([Friend or Foe](../games/spider-man-friend-or-foe/NOTES.md)).
 - **Low memory kills long runs.** Run tests one at a time on a busy PC, in short
   batches, and clean up any game process you started.
 - **Clean up.** Remove test-only files from anything you ship and compare the shipped
@@ -80,6 +81,9 @@ animation checker.
 - **A flake from game behaviour is fixed in the action, not the assert.** A hit test failed because the NPC parried. The test now swings again, up to three times, as a player would; the assert stays strict (Gothic 3).
 - **Check what the other player sees.** A motion name set on a body is not a motion running; measure "is it running". Check also that enemies pick a remote player by themselves; forced attacks hid that they never did (Gothic 3, first human look).
 - **Own processes positively.** Stop only a process your run started (its PID, or a marker on its command line). A blanket kill by image name once destroyed a live two-player session (The Doors of Trithius).
+
+- **Validate the checksum itself.** Exclude padding and inactive history only with native control-flow evidence; retain mutation checks for active fields ([Friend or Foe](../games/spider-man-friend-or-foe/NOTES.md)).
+- **Respect fixture boundaries.** Inject controls before the measured binding stage and end special assertions on schedule; keep general invariants running ([Friend or Foe](../games/spider-man-friend-or-foe/NOTES.md)).
 
 ## Testing online features on one PC
 

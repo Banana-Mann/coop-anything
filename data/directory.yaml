@@ -7124,7 +7124,7 @@
   made_with_coop_anything: true
 - game: 'Spider-Man: Friend or Foe'
   year: 2007
-  engine: Vicarious Visions Alchemy
+  engine: unknown
   project: 'Spider-Man: Friend or Foe Co-op (Co-op Anything Discord)'
   url: https://discord.com/channels/1561411702082510879/1562185850777772152
   other_urls: []
@@ -7137,7 +7137,7 @@
   last_activity: 2026-10
   qa: none
   notes: 'Online co-op in development by a dev on the Co-op Anything Discord: each player on their own PC and screen, with
-    keyboard or controller, without Parsec or Steam Remote Play. No public build yet.'
+    keyboard or controller, without Parsec or Steam Remote Play. No public build yet. Relationship to the separately listed native research project and its exact engine identity are unverified.'
   sources:
   - https://discord.com/channels/1561411702082510879/1562185850777772152
   - https://www.pcgamingwiki.com/wiki/Spider-Man%3A_Friend_or_Foe
@@ -7406,3 +7406,61 @@
   - https://www.nexusmods.com/callofdutyblackops3/mods/53
   - https://github.com/LocalPlayer123/BO3-4-Player-Local-Splitscreen-on-PC
   checked: '2026-10-21'
+- game: 'Spider-Man: Friend or Foe'
+  year: 2007
+  engine: unknown
+  project: Official Windows local co-op
+  url: https://investor.activision.com/static-files/d8459280-fceb-49b0-9210-86bb7010c3d3
+  kind: official
+  status: official
+  coop_scope:
+    players_visible: true
+    story: true
+    enemies: unknown
+    world_state: unknown
+    items: unknown
+  players: '2 (one PC)'
+  networking: unknown
+  open_source: unknown
+  last_activity: '2007-10'
+  qa: none
+  notes: >-
+    Published two-player local co-op on one computer; contemporary PC reviews report
+    no native online play. The separate research entries do not change this scope.
+  sources:
+  - https://investor.activision.com/static-files/d8459280-fceb-49b0-9210-86bb7010c3d3
+  - https://www.swiftworld.net/2007/10/13/pc-spider-man-friend-or-foe-review/
+  - https://www.gamespot.com/reviews/spider-man-friend-or-foe-review/1900-6180451/
+  checked: '2026-10-20'
+- game: 'Spider-Man: Friend or Foe'
+  year: 2007
+  engine: unknown
+  project: Friend or Foe Online (native Windows research)
+  url: https://github.com/IlkinQafarov/spider-man-friend-or-foe-online
+  other_urls:
+  - https://github.com/cranebeaker/coop-anything/issues/71
+  kind: mod
+  status: prototype
+  coop_scope:
+    players_visible: unknown
+    story: unknown
+    enemies: unknown
+    world_state: unknown
+    items: unknown
+  players: '2 (target)'
+  networking: unknown
+  open_source: 'yes'
+  last_activity: '2026-10'
+  qa: none
+  notes: >-
+    Source-only Windows prototype targeting two independent clients. English/Russian
+    bot checks used two processes on one PC and mock transport; Steam delivery and
+    complete co-op remain unverified. No playable release.
+  sources:
+  - https://github.com/IlkinQafarov/spider-man-friend-or-foe-online
+  - https://github.com/IlkinQafarov/spider-man-friend-or-foe-online/blob/main/docs/STATUS.md
+  - https://github.com/cranebeaker/coop-anything/issues/71
+  - https://partner.steamgames.com/doc/features/multiplayer/networking
+  checked: '2026-10-21'
+  up_for_adoption: false
+  made_with_coop_anything: true
