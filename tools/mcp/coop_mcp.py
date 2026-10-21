@@ -371,7 +371,7 @@ TOOLS = {
                   {"name": ("string", "skill name")}, ["name"]),
     "get_game": (t_get_game, "Read the write-up for a game that has been worked on (see list_docs for slugs).",
                  {"slug": ("string", "folder name under games/")}, ["slug"]),
-    "get_test_tool": (t_get_test_tool, "Read the README of a co-op sync test tool (chaos, flight, fuzz, ownership, fakeworld, gameslot, gamepool, scenarios, bots, animcheck; list_docs lists them).",
+    "get_test_tool": (t_get_test_tool, "Read the README of a co-op sync test tool (chaos, flight, fuzz, ownership, fakeworld, gameslot, gamepool, scenarios, bots, animcheck, bridge, inspect, hotreload, mutants, buildlock; list_docs lists them).",
                       {"name": ("string", "folder name under tools/")}, ["name"]),
     "validate_entry": (t_validate_entry, "Check a new or edited directory entry (YAML text) against the schema before contributing it.",
                        {"entry_yaml": ("string", "one entry as YAML")}, ["entry_yaml"]),

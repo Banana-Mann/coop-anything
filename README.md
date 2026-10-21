@@ -95,6 +95,11 @@ Each has tests, mutation twins and one command that prints `ALL OK`
 | [gameslot](tools/gameslot), [gamepool](tools/gamepool) | Lock and warm pool for running several game copies on one PC safely |
 | [scenarios](tools/scenarios), [bots](tools/bots) | JSON start states plus multi-bot co-op playbooks with a state diff after each step |
 | [animcheck](tools/animcheck) | Compares animation and pose across machines and flags sliding, T-poses, floating and rubber-banding |
+| [bridge](tools/bridge), [inspect](tools/inspect) | An RPC server template for inside your game (console line, state dump, save, load, screenshot) with a Python client, plus a live side-by-side view of every copy |
+| [hotreload](tools/hotreload) | Split your mod into a loader and a core, and swap the core inside the running games instead of restarting them |
+| [mutants](tools/mutants), [buildlock](tools/buildlock) | Runtime mutation twins for every fix, and a shared build lock with a build cache |
+
+[Fast iteration](playbook/fast-iteration.md) shows where the time in an in-game fix round goes and which tool removes each wait.
 
 They come from the [fnv-coop](https://github.com/cranebeaker/fnv-coop) project. The
 `coop-sync-testing` skill tells your agent when to use which.
@@ -189,6 +194,7 @@ above gives a feel for it.
   [fuzzing sync](playbook/fuzzing-coop-sync.md) · [actor ownership](playbook/actor-ownership.md) ·
   [fake world testing](playbook/fake-world-testing.md) · [several game copies](playbook/multi-instance-testing.md) ·
   [bots and playbooks](playbook/bots-and-playbooks.md) · [animation sync](playbook/animation-sync-checks.md) ·
+  [fast iteration](playbook/fast-iteration.md) · [in-game bridge](playbook/in-game-bridge.md) · [hot reload](playbook/hot-reloading-your-mod.md) ·
   [story sync by effects](playbook/effect-capture-story-sync.md) ·
   [methods](playbook/methods.md) · [lessons](playbook/lessons.md)
 - [DIRECTORY.md](DIRECTORY.md) and its [schema](data/SCHEMA.md)
