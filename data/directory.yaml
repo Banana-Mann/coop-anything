@@ -7607,3 +7607,34 @@
   sources:
   - https://github.com/Shocklinks/autonauts-coop
   checked: '2026-10-21'
+- game: 'The Lord of the Rings: The Two Towers'
+  year: 2002
+  engine: Stormfront Fusion (Xbox), static recompilation to PC (The Two Towers Recompiled, xboxrecomp)
+  project: Two Towers couch co-op (on The Two Towers Recompiled)
+  url: https://github.com/Volverine-Dude/TooTawersRecomp-coop
+  other_urls:
+  - https://github.com/cranebeaker/coop-anything/tree/main/games/lotr-two-towers
+  - https://github.com/Gumpolas/TooTawersRecomp
+  kind: mod
+  status: alpha
+  coop_scope:
+    players_visible: 'yes'
+    story: 'yes'
+    enemies: 'yes'
+    world_state: 'yes'
+    items: per-player
+  players: '2'
+  networking: unknown
+  open_source: 'yes'
+  last_activity: 2026-10
+  qa: automated
+  notes: Local couch co-op (two controllers on one PC, one shared camera, no networking), built on The Two Towers
+    Recompiled by Gumpolas. Player 2 has their own hero, controller, weapons, ammo, experience and upgrades; both play
+    the story levels, with post-level stats and shops for both. Source only (MIT, a fork of the port), built from the
+    player's own US retail game; tested with a 14-scenario bot suite (73 checks, all passing) on the port's 1.9.4.
+  sources:
+  - https://github.com/Volverine-Dude/TooTawersRecomp-coop
+  - https://github.com/cranebeaker/coop-anything/tree/main/games/lotr-two-towers
+  - https://github.com/Gumpolas/TooTawersRecomp
+  checked: '2026-10-21'
+  made_with_coop_anything: true
