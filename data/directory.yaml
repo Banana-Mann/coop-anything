@@ -7580,3 +7580,30 @@
   - 'Repo DIRECTORY.md and games; public GitHub issue/PR and repository search for Godfather 2 / Godfather II co-op and multiplayer, 2026-10-20'
   - 'English web searches: Godfather II co-op campaign, co-op mod, online co-op, multiplayer mod; checked Nexus, ModDB, GameBanana, GameFAQs results and PCGamingWiki, 2026-10-20'
   - 'Not checked: game Discord, Steam guides in depth, Archive.org; attempted Russian, German, Italian and Spanish queries were rate-limited (HTTP 429)'
+- game: Autonauts
+  year: 2019
+  engine: Unity
+  project: AutonautsCoop
+  url: https://github.com/Shocklinks/autonauts-coop
+  other_urls: []
+  kind: mod
+  status: alpha
+  coop_scope:
+    players_visible: 'yes'
+    story: 'yes'
+    enemies: unknown
+    world_state: 'yes'
+    items: shared
+  players: 2-8
+  networking: steam-relay
+  open_source: 'yes'
+  last_activity: 2026-10
+  qa: automated
+  notes: BepInEx 5 plugin, host-authoritative mirror (joiner sims frozen, input replayed on the host). Steam
+    lobbies/invites plus direct IP (TCP 27015). Joiners build with undo, teach and program bots, and use building menus,
+    bot server, groups, catapult, spaceport and planning; characters are stored with the host's save while away.
+    Two-instance automated suite 101/101 (TCP) and 84/84 (Steam framing over UDP) plus a big-base stress test; the real
+    Steam lobby path between two PCs is untested. MIT. Write-up in games/autonauts.
+  sources:
+  - https://github.com/Shocklinks/autonauts-coop
+  checked: '2026-10-21'
