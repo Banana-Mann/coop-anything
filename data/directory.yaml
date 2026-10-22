@@ -7692,3 +7692,38 @@
   - https://tomorrowcorporation.com/posts/grab-a-friend-switch-editions-will-have-local-multiplayer
   checked: '2026-10-22'
   made_with_coop_anything: true
+- game: The Witness
+  year: 2016
+  engine: In-house engine (Thekla); family not confirmed from the binary
+  project: witness-coop
+  url: https://github.com/TommoDotCommo/witness-coop
+  other_urls: []
+  kind: mod
+  status: prototype
+  coop_scope:
+    players_visible: 'yes'
+    world_state: partial
+  players: 2 (two copies on one PC)
+  networking: direct-ip
+  open_source: 'yes'
+  last_activity: 2026-10
+  qa: automated
+  notes: Dev preview, not playable with friends yet (no installer or release; localhost only). A proxy AnselSDK64.dll loaded by the game hooks Direct3D 11 Present
+    and draws the other player as a puppet; two game copies exchange camera pose over UDP. Solving a panel in one game marks it solved in the other and opens
+    the gated door by calling the game's own door function (events are numbered, acknowledged and resent). Tested on two tutorial door puzzles and one panel power-on chain, Steam build 11370412.
+    Panel power-on progression and one cable lit by a tutorial maze use their own reliable events; a fresh or reloaded game resyncs from its peer. Power-off switching, other cables, plates, lasers and bridges remain unsynced. QA is an in-process bot (no focus, no desktop input) with a state diff over all panels and doors
+    and baseline, loss, mutant, peer-restart, late-join, save-reload, second-door, power-on and cable scenarios. Coverage remains narrow, three tutorial puzzles (see games/the-witness). No other co-op work
+    was found; the MIT-licensed witness-randomizer and witness-trainer, which read and write the running game, were the starting point.
+  sources:
+  - https://github.com/TommoDotCommo/witness-coop
+  - https://github.com/jbzdarkid/witness-randomizer
+  - https://github.com/jbzdarkid/witness-trainer
+  - https://store.steampowered.com/app/210970/
+  - https://en.wikipedia.org/wiki/The_Witness_(2016_video_game)
+  checked: '2026-10-22'
+  made_with_coop_anything: true
+  searched:
+  - 'Repo DIRECTORY.md, games/, playbook, and public GitHub issues and PRs for The Witness (nothing), 2026-10-22'
+  - 'GitHub repository search via the API: the witness multiplayer, witness coop, the witness randomizer, TheWitnessExplorer, witness64_d3d11 (no co-op project), 2026-10-22'
+  - 'WebSearch (extended): The Witness Jonathan Blow multiplayer co-op mod; also randomizer / Archipelago client and engine queries (no co-op mod), 2026-10-22'
+  - 'Not checked: Nexus Mods, ModDB, Reddit, archive.org, Steam guides in depth, the game or speedrun Discords, non-English communities'
