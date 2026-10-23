@@ -7727,3 +7727,31 @@
   - 'GitHub repository search via the API: the witness multiplayer, witness coop, the witness randomizer, TheWitnessExplorer, witness64_d3d11 (no co-op project), 2026-10-22'
   - 'WebSearch (extended): The Witness Jonathan Blow multiplayer co-op mod; also randomizer / Archipelago client and engine queries (no co-op mod), 2026-10-22'
   - 'Not checked: Nexus Mods, ModDB, Reddit, archive.org, Steam guides in depth, the game or speedrun Discords, non-English communities'
+- game: 'Pitfall: The Lost Expedition'
+  year: 2004
+  engine: Edge of Reality in-house (unknown name)
+  project: (none found)
+  url: ''
+  other_urls: []
+  kind: gap
+  status: none
+  coop_scope: {}
+  players: unknown
+  networking: unknown
+  open_source: unknown
+  last_activity: unknown
+  qa: none
+  notes: No co-op mod found. PS2 NTSC-U (SLUS-20408, CRC 394F402E) research in games/pitfall-the-lost-expedition
+    has a confirmed memory map (player, position, facing, health, level), a 20 Hz PINE logger for two PCSX2
+    instances and the decompiled player spawn path; a first second-player spawn patch breaks the level. A
+    2004 PC port by Beenox exists.
+  sources:
+  - https://en.wikipedia.org/wiki/Pitfall:_The_Lost_Expedition
+  - https://github.com/Avasam/ptle-tools
+  checked: '2026-10-23'
+  made_with_coop_anything: true
+  searched:
+  - 'Repo DIRECTORY.md, games/, and public GitHub issues and PRs for Pitfall (nothing), 2026-10-23'
+  - 'WebSearch: Pitfall The Lost Expedition co-op mod, multiplayer, decompilation, two player (only ptle-tools,
+    a GameCube/Dolphin toolset), 2026-10-23'
+  - 'Not checked: Reddit, Discord, Nexus Mods, ModDB, speedrun community resources beyond ptle-tools'

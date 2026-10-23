@@ -172,11 +172,12 @@ Split-screen or shared-screen modes in PS2 games often reuse the same code path 
 PCSX2 implements an IPC protocol, PINE, so an external program can talk to the running emulator. Facts:
 
 - Wiki page: [PCSX2 IPC Protocol](https://wiki.pcsx2.net/IPC_Protocol) (403 to automated fetch; content from search snippets). Protocol spec and C++ reference in [GovanifY/pine](https://github.com/GovanifY/pine) (standard folder is marked as a draft; bindings folder exists; the page does not list opcodes).
-- Enable it in PCSX2 Advanced settings, default slot/port 28011, PCSX2 1.7 Qt or newer ([mcp-pine setup notes](https://glama.ai/mcp/servers/dmang-dev/mcp-pine), **UNVERIFIED** third party).
+- Enable it in PCSX2 Advanced settings, default slot/port 28011, PCSX2 1.7 Qt or newer ([mcp-pine setup notes](https://glama.ai/mcp/servers/dmang-dev/mcp-pine)). Verified on PCSX2 v2.8.2 (Windows) with Pitfall: The Lost Expedition: the keys are `EnablePINE = true` and `PINESlot = <port>` under `[EmuCore]` in `inis/PCSX2.ini` ([games/pitfall-the-lost-expedition](../games/pitfall-the-lost-expedition/NOTES.md)). A hand-written minimal `PCSX2.ini` is thrown away on first launch (PCSX2 regenerates defaults and opens the setup wizard); let PCSX2 create the file, then edit keys in place.
+- Save and load state over PINE work with opcodes 0x09 / 0x0A plus a one-byte slot (same Pitfall test). Savestates (`.p2s`) are zip files holding `eeMemory.bin` (32 MiB EE RAM). The default compression (`SavestateCompressionType = 2`, Zstandard, zip method 93) cannot be read by Python 3.13's `zipfile`; set it to `0` (uncompressed) for offline RAM diffing.
 - Opcodes: 8/16/32/64-bit read and write, plus version, savestate, and game metadata commands, in a reference server source ([pine_server.cpp mirror](https://repo.retrodeck.net/Xargon/Duckstation/src/commit/1fd8d2701de0c9887509703a027b8d8bb439cd6a/src/core/pine_server.cpp)). A later variant has bulk read/write opcodes 0x20 and 0x21; another third party notes there is no native bulk read so clients pipeline small reads ([glama mcp-pine](https://glama.ai/mcp/servers/dmang-dev/mcp-pine)). Check the version you target.
 - Python wrapper: [pcsx2-memory-accessor](https://pypi.org/project/pcsx2-memory-accessor/).
 - EE main RAM is 0x00100000 to 0x01FFFFFF (32 MiB) and scratchpad is 0x70000000 per the same MCP listing (**UNVERIFIED**, widely known but confirm in your tool).
-- Multiple-instance behaviour is undocumented in the pages I found. Plan to test whether a second instance can use a different slot or a separate portable install. **UNVERIFIED**.
+- Multiple instances: two portable PCSX2 v2.8.2 installs (each with an empty `portable.txt` next to `pcsx2-qt.exe`) on PINE slots 28011 and 28012 ran at the same time on one Windows PC, each answering with its own state; both opened the same ISO copy without problems ([Pitfall notes](../games/pitfall-the-lost-expedition/NOTES.md)). Not tested on Linux or macOS.
 
 What PINE can and cannot do:
 
@@ -222,7 +223,8 @@ PCSX2 A  <--PINE-->  bridge A  <--TCP/UDP-->  bridge B  <--PINE-->  PCSX2 B
 
 ### Step 6: testing two instances on one PC
 
-- Run two PCSX2 installs, each portable, with different PINE slots if supported (undocumented; test it). **UNVERIFIED**.
+- Run two PCSX2 installs, each portable, with different PINE slots (works on v2.8.2 Windows, see Step 3). Expect slower level loads with two running.
+- Drive each instance without a human: posting `WM_KEYDOWN`/`WM_KEYUP` to the windows of one PCSX2 process presses its keyboard-bound pad buttons without taking focus. Hold presses about 400 ms; 120 ms presses were missed on menus. PCSX2's Screenshot hotkey (F8) works the same way, so a script can check what is on screen. Controller "Automatic Mapping" replaces the keyboard bindings; list both, as duplicate keys in `[Pad1]` (for example `LLeft = SDL-0/-LeftX` and `LLeft = Keyboard/A`), to keep script control and a real pad.
 - Run two bridge processes on loopback ports.
 - Script the test (see [automated-qa.md](automated-qa.md)): boot save state, write a pad value into player A, assert via PINE that player B sees the remote avatar's position within tolerance after N seconds, then assert world flags. No human needs to look at the screen.
 - Both instances compete for GPU; use a low resolution and software or Vulkan renderer for the second one if frame times suffer.
@@ -253,7 +255,7 @@ Short decision notes; details in the sources above.
 
 Re-check these before telling a user they work.
 
-1. Whether PCSX2 supports multiple PINE slots for two simultaneous instances.
+1. ~~Whether PCSX2 supports multiple PINE slots for two simultaneous instances.~~ Yes on v2.8.2 Windows, see Step 3. Still open on Linux and macOS.
 2. Whether any PCSX2 netplay fork builds against 2026 master and runs a real game.
 3. Whether DuckStation has an official PINE server and whether HeatXD's GGPO build is maintained.
 4. ModLoader64 and Z64Online maintenance status in 2026 (public repos exist, activity unclear).
