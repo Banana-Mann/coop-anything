@@ -167,6 +167,8 @@ If yes, there are two options with no RAM work:
 
 Split-screen or shared-screen modes in PS2 games often reuse the same code path as the second pad, so a second PINE-driven "virtual controller" (see below) may be enough to give player 2 control without any new gameplay code.
 
+Driving a puppet through controller port 2 (from [Pitfall: The Lost Expedition](../games/pitfall-the-lost-expedition/NOTES.md)): if the game keeps per-player input slots, a second player object spawned with slot 1's input is fed by port 2 and ignores pad 1. Writing stick values into the port-2 controller object over PINE did not work there, because the game resets a disconnected port's state every frame. What worked: set PCSX2's Controller Port 2 to a DualShock 2 bound to unused keyboard keys and press those keys from the bridge by posting window messages to that PCSX2 process (no focus needed). The puppet then gets the game's own run animations and facing, and the bridge steers it toward the remote player's position, snapping only when it is far off or blocked.
+
 ### Step 3: memory-sync via PINE
 
 PCSX2 implements an IPC protocol, PINE, so an external program can talk to the running emulator. Facts:
@@ -177,6 +179,9 @@ PCSX2 implements an IPC protocol, PINE, so an external program can talk to the r
 - Opcodes: 8/16/32/64-bit read and write, plus version, savestate, and game metadata commands, in a reference server source ([pine_server.cpp mirror](https://repo.retrodeck.net/Xargon/Duckstation/src/commit/1fd8d2701de0c9887509703a027b8d8bb439cd6a/src/core/pine_server.cpp)). A later variant has bulk read/write opcodes 0x20 and 0x21; another third party notes there is no native bulk read so clients pipeline small reads ([glama mcp-pine](https://glama.ai/mcp/servers/dmang-dev/mcp-pine)). Check the version you target.
 - Python wrapper: [pcsx2-memory-accessor](https://pypi.org/project/pcsx2-memory-accessor/).
 - EE main RAM is 0x00100000 to 0x01FFFFFF (32 MiB) and scratchpad is 0x70000000 per the same MCP listing (**UNVERIFIED**, widely known but confirm in your tool).
+- One client per slot: while one program held a PINE connection to an instance, a second
+  client on the same port timed out (PCSX2 v2.8.2, Pitfall test). Route every reader and writer
+  through one process per instance.
 - Multiple instances: two portable PCSX2 v2.8.2 installs (each with an empty `portable.txt` next to `pcsx2-qt.exe`) on PINE slots 28011 and 28012 ran at the same time on one Windows PC, each answering with its own state; both opened the same ISO copy without problems ([Pitfall notes](../games/pitfall-the-lost-expedition/NOTES.md)). Not tested on Linux or macOS.
 
 What PINE can and cannot do:

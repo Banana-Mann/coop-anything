@@ -2,7 +2,8 @@
 
 Usage: python -I tools/pcsx2_keys.py <pid> <key>[:hold_ms] [<key>[:hold_ms] ...]
 Keys: up down left right return backspace escape space tab f1..f12, or a single letter/digit.
-"wait:<ms>" pauses between keys. Only windows owned by <pid> receive messages.
+"wait:<ms>" pauses between keys; "<key>:down" / "<key>:up" press or release without the other.
+Only windows owned by <pid> receive messages.
 """
 import ctypes
 import sys
@@ -75,6 +76,11 @@ def main():
         name, _, ms = step.partition(":")
         if name == "wait":
             time.sleep(int(ms) / 1000)
+            continue
+        if ms in ("down", "up"):  # e.g. j:down ... j:up holds a key across other commands
+            msg = WM_KEYDOWN if ms == "down" else WM_KEYUP
+            for hwnd in hwnds:
+                user32.PostMessageW(hwnd, msg, vk_of(name), lparam(vk_of(name), ms == "up"))
             continue
         press(hwnds, vk_of(name), int(ms) if ms else 120)
         time.sleep(0.15)

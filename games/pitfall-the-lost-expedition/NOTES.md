@@ -128,16 +128,134 @@ every few seconds, placing the real player at about (0, 0, -7.6) each time. Load
 taken before the patch restored a normal game. The generator can write a `.pnach`
 (`spawn_patch.py pnach`), but it was not tested as a pnach and it breaks the level.
 
+### Spawn experiment 2: second Harry in the level
+
+- Faster loop: `tools/catch_load.py 3 20` saves slot 20 as soon as the loader (word
+  `0x0052F1F4`) reaches state 3 during QUIT -> LOAD GAME. `tools/spawn_trial.py <pid> <steps>`
+  loads that slot, writes the stub with only the first N stages, lets the load finish (states
+  3 -> 5 -> 6 -> 0 in about 4.5 s), skips the cutscene and samples 10 s. Healthy = loader stays
+  at 0 and the real player is within 30 units of the Crash Site spawn.
+- Results: no patch HEALTHY; alloc HEALTHY; + ctor HEALTHY; + init HEALTHY; + placement HEALTHY
+  (second object at (2, 0, 0)); + scene add BROKEN (second object falling, z = -2883).
+- Cause: at state 5 the spawn data position (+0x50) is (0, 0, 0) in Crash Site; the real player
+  is moved to his start (-1.587, 747.350, -11.028) later. A second player added to the scene at
+  (2, 0, 0) falls under the map and the level restarts.
+- Fix: place the second player at a fixed ground point (`spawn_patch.build_stub(pos=...)`,
+  `spawn_trial.py ... --pos=0.9,744.35,-10.5`). Result: HEALTHY; second object settles to
+  (0.84, 744.35, -11.00); the screenshot shows two Harrys standing in the clearing.
+- With two Harrys: holding left for 1 s moved both. The real one went x +13.8, the second
+  x -14.6 (opposite direction). The second Harry reads pad 1.
+- Writing the second Harry's +0x340 / +0x344 moves him (screenshot shows him on the other side
+  of the real Harry); the write sticks.
+- Savestate 21 holds the two-Harry scene (local only).
+
+### Puppet: second Harry ignores the controller
+
+- Controller data found by savestate diff while holding L1 / R1 (`tools/pad_search.py`): raw
+  libpad buttons at 0x00576782 / 0x00576802 (0xFFFF idle, L1 clears 0x0400, R1 0x0800);
+  game-side button words around 0x00576414-0x005764C8 and 0x00578C60 (L1 = 4, R1 = 8). These
+  are heap, reached only through the controller table `0x0055E330` (8 ports,
+  `FUN_00319850(port)`).
+- Per-player-slot input objects: table `0x0055EC80` (`0x01FFB268`, `0x01FFB310`, `0x01FFB3B8`,
+  `0x01FFB460` in this run). `FUN_00319878(slot)` returns `[slot] + 0xC`; `FUN_003196b8` binds a
+  player slot to a controller port.
+- Player + `0x7A0` is the player's input source: both Harrys held `0x01FFB288` (slot 0 + 0xC).
+  It is what "init" (`FUN_001f29b8`, class +0x294) stores, so level loader +0x8C is player 1's
+  input object, not spawn data (correction).
+- Writing the second Harry's +0x7A0 = slot 1's input (`0x01FFB320`): holding left moves only the
+  real Harry; the second Harry stays put, is still simulated (gravity, drawn position follows
+  writes to +0x340) and is drawn where he is put. Screenshot shows both.
+- `spawn_patch.py` now passes slot 1's input to init. Full trial from the mid-load savestate:
+  HEALTHY, puppet +0x7A0 = 0x01FFB320, real Harry moved (-1.58, 747.35) -> (-15.23, 752.93) while
+  holding right 1 s, puppet stayed at (0.89, 744.35, -11.00). Savestate 22 holds this scene.
+### Bridge: two PCSX2 instances, each Harry drives the other's puppet
+
+- Setup: savestate 22 (puppet scene) copied into copy B's `sstates/`, B launched with
+  `-state 22`. Both instances then have the real player at 0x00ED6F30 and the puppet at
+  0x015E37C0 (input slot 1).
+- `tools/ptle_bridge.py --a 28011 --b 28012 --hz 30`: per tick reads each real player's +0x340
+  and writes it into the other instance's puppet +0x340; only while both report the same level
+  and the puppet still has class 0x004AB738.
+- Run 1 (14 s): 420 ticks at 30.0 Hz, 420 synced, worst tick 3.6 ms. B walked right 1.5 s, then A
+  walked left 1.5 s. Afterwards A real = B puppet = (6.56, 744.56, -10.76) and B real = A puppet =
+  (-8.04, 774.90, -10.27): gap 0.00 both ways.
+- Run 2 (10 s, both reloaded from 22): 300 ticks, 300 synced, worst tick 5.9 ms. Only B's Harry
+  walked; screenshots of A show A's puppet walking up to A's camera while A's own Harry stands.
+- A second PINE client on the same port timed out while the bridge was connected. Derived: PCSX2's
+  PINE server serves one client at a time per slot; checks must go through the bridge's socket.
+- Not done in that version: the puppet slides without a walk animation and keeps its own facing.
+
+### Puppet animation and facing through controller port 2
+
+- Input path: player + 0x7A0 points at an entry {buffer, handler 0x0047D2C0, controller object,
+  owner} inside the slot object. Real player: slot 0 object + 0x20 -> buffer 0x00578C60,
+  controller 0x005763A8 (port 1). Puppet: slot 1 object + 0x10 -> buffer 0x00579E88, controller
+  0x005776C8 (port 2).
+- Left stick in port 1's controller object (stick held vs idle): float x/y at +0x5C, +0x70, +0x84,
+  +0xE8, +0x33C, +0x34C; centred flags +0x37C / +0x380; raw analog bytes [rx, ry, lx, ly] at
+  +0x3DC (0x7F centre); also in buffer 0x00578C60 +0x228 / +0x22C.
+- With PCSX2 Pad2 Type = None, writing a stick into port 2's object or the puppet's buffer does
+  not make the puppet walk (moves 0.0-0.6 units): the game resets +0x04 (pad type 7 -> 0), the
+  stick floats at +0x5C / +0x70 / +0x84 and the raw bytes every frame for a disconnected pad
+  (`tools/puppet_stick.py`, `tools/port2_stick.py`, `tools/puppet_enable_scan.py`).
+- Fix: PCSX2 Pad2 = DualShock2 bound to unused keys (LUp/LDown/LLeft/LRight = U/N/B/M,
+  Cross/Square/Circle/Triangle = Z/X/C/V, L1/R1 = Y/R; no Start/Select). Port 2's object then
+  reads type 7. Holding port-2 left for 1.5 s moved the puppet 18 units while the real Harry stood
+  still; a mid-run screenshot shows the puppet in the run animation, facing his direction of travel.
+- The puppet's stick is world-fixed (no camera): right = +x, left = -x, up = -y, down = +y. The
+  same "left" gave heading 178.6 deg at three different camera / real-player facings
+  (45, 117, -54 deg).
+- Bridge steer mode (`tools/ptle_bridge.py`, default): per tick, hold port-2 keys in instance D
+  toward the other instance's real player (8 directions, start above 1.2 units, stop below 0.6,
+  snap the position above 6), and copy the other player's Cross/Square/Circle/Triangle/L1/R1 from
+  the raw pad 1 buttons (0x00576782, active low). Run (16 s): 480 ticks at 30 Hz, all synced,
+  worst tick 7.9 ms; while a Harry ran, his puppet trailed by at most 4.8 units and settled within
+  1.1 units after he stopped; no snaps were needed.
+- Gotcha: editing PCSX2.ini with a regex built for LF lines removed copy B's [Pad2] section (the
+  file uses CRLF); write the section explicitly.
+
+### Network peer (one per PC) and lag tests
+
+- `tools/ptle_peer.py`: one process per PC next to its PCSX2. 30 Hz; sends a 32-byte UDP packet
+  (level, position, pad-1 buttons, seq, token from a shared `--code`); steers its own puppet
+  toward the other player's position with the bridge's steer logic. Host listens and answers the
+  last valid sender; joiner connects to ip:port. Drops packets older than the newest seen;
+  releases keys when the other side has been silent for 1 s. Stall detection added to `steer`:
+  if trying to move for 1 s without getting 0.1 units closer (blocked, often by the local
+  player), snap the position.
+- Tests with both peers on this PC (`tools/peer_trial.ps1`: both copies load savestate 22, B's
+  Harry walks 1.5 s, then A's), host on 127.0.0.1:47100, joiner direct or through the chaos relay
+  (`tools/chaos/chaos.py relay --seed 7`), 18 s each:
+
+  | Network | Received of ~540 sent, each side | Dropped as old | Final puppet gap | Snaps |
+  |---|---|---|---|---|
+  | loopback | 539 / 539 | 0 | 1.13 / 1.15 | 2 / 2 |
+  | bad_wifi | 485 / 487 | 37 / 41 | 1.14 / 1.32 | 2 / 8 |
+  | hell | 183 / 177 | 231 / 264 | 0.93 / 1.20 | 2 / 2 |
+
+  The first snap of each run is the start (gap 18.3 at t = 0 before both games settle).
+- `.pnach` on a cold boot: `spawn_patch.py pnach` (unlabeled lines, puppet at Crash Site
+  (0.9, 744.35, -10.5), input slot 1) in copy A's `patches/`. PCSX2 log: "Found 1 game patches",
+  "64 game patches are active", and "Disabling any bundled 'patches.zip' patches due to unlabeled
+  patch being loaded". After boot the stub, hook and switch are in memory; LOAD GAME -> Crash
+  Site gives the real player at the spawn, a puppet at 0x015E37C0 with input 0x01FFB320 at
+  (0.89, 744.35, -11.00), and the screenshot shows both Harrys.
+- Two physical PCs over Tailscale or a forwarded port: not tested. Setup steps in PLAY.md.
+- Not done: buttons copied but jumps/attacks not checked on screen; the puppet's spawn point is
+  hard-coded for Crash Site; only local (loopback) PINE, no network between two PCs yet.
+
+- Dead ends, for the record: `tools/input_flag_scan.py` found that +0x10C = 0 stops the second
+  Harry moving, but it freezes his whole update (his drawn transform no longer follows +0x340,
+  and writing +0x190 does not move the model either).
+
 ## Derived (not proven)
 
 - Player + `0x684` (5) is probably max health: writing 3 there clamped +0x688 to 3, but the
   HUD slot count did not change within 1 s.
 - GameCube offsets from ptle-tools do not carry over with a fixed shift (position GC +0x338 vs
   PS2 +0x340); check each field.
-- Spawn failure, two guesses: (a) the constructor or scene add registers the new object in
-  global singletons (camera target, checkpoint, listener) that the real player relies on;
-  (b) the second Harry's placement did not hold, he fell out of the world, and a fall handler
-  restarts the level with broken data.
+- The opposite walking direction of the second Harry is probably camera-relative input
+  computed against a camera he does not own. Not checked.
 
 ## Unknown
 
